@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ceate satellites</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="SATELLITES.XML,ENIGMA2,SATELLITES.XML.CREATOR,SATELLITES.XML.GENERATOR,DVB-S,VU+">
+    <meta name="description" content="Create satellites.xml for enigma2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Igor Udovenko">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>$(document).ready(function () {
+            $("button").click(function () {
+                $("#div1").fadeIn();
+                $("#div2").fadeIn("slow");
+                $("#div3").fadeIn(3000);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").slideToggle("slow");
+            });
+        });
+    </script>
+</head>
+<style>
+    body {
+        background-image: url('https://i.gifer.com/PYsB.gif');
+        background-color: rgb(80, 114, 133);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: relative;
+    }
+
+    button {
+        background-color: #00f;
+        color: #e70f0f
+    }
+</style>
+
+<body>
+    <div class="container-fuild">
+        <h1>
+            <pre
+                style="color: rgb(241, 234, 12);background-color: blue;">             <b> Create satellites.xml for enigma2</b></pre>
+        </h1>
+        <a style="color: rgb(245, 226, 9);position:relative;top: -52px;left: 10px;" href="{% url 'home' %}">Home</a>
+        <div id="flip"
+            style="color: rgb(222, 28, 28); position: relative;top: -72px; text-align: center; left: 1170px;height: 25px; width: 140px;">
+            Feedback
+        </div>
+    </div>
+    <div id="panel"
+        style="color: aliceblue;position: relative;display: none; top: 3px; width: 200px;height: 400px; left: 900px;">
+        <form style="color: rgb(247, 231, 7)" action="{% url 'send_email' %}" method="post">
+            {% csrf_token %}
+            {{form_message.as_p}}
+            <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+
+</html>

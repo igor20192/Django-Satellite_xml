@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-3">
+    <form style="color: rgb(172, 237, 134);" action="{% url 'create_provider' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary"> <span id="div1" class="spinner-border spinner-border-sm"
+                style="display: none;"></span>Create
+            Provider</button>
+    </form>
+    <a style="color: darkgoldenrod;" href="{% url 'home' %}">Home</a>
+</div>
+{% endblock %}

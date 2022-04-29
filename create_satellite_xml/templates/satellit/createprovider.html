@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid pt-3">
+    <h3 style="color: aliceblue;">Providers:</h3>
+    <p style="color: aliceblue;">{{data}}</p>
+
+    <button style="background-color: darkgreen;" onclick="window.location.href = '/download';">View</button>"
+    <a style="color: brown;" href="{% url 'download' %}" download="satellites.xml">Download</a>
+
+</div>
+{% endblock %}
