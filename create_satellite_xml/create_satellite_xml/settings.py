@@ -26,10 +26,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", default=0)
-ALLOWED_HOSTS = ["*"]
+DEBUG = env("DEBUG")
+ALLOWED_HOSTS = ["ec2-44-194-75-237.compute-1.amazonaws.com"]
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-SECURE_HSTS_SECONDS = 60
+SECURE_HSTS_SECONDS = 10
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
@@ -103,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 DATABASES = {"default": env.db("DATABASE_URL")}
+<<<<<<< HEAD
 # DATABASES = {
 #     "default": {
 #         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
@@ -113,6 +114,9 @@ DATABASES = {"default": env.db("DATABASE_URL")}
 #         "PORT": os.environ.get("SQL_PORT", "5432"),
 #     }
 # }
+=======
+
+>>>>>>> 7278db97a1f2d5f0af1b0845bb3ee7a29a1fc296
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
