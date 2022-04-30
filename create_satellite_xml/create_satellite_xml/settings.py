@@ -103,20 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 DATABASES = {"default": env.db("DATABASE_URL")}
-<<<<<<< HEAD
-# DATABASES = {
-#     "default": {
-#         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-#         "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-#         "USER": os.environ.get("SQL_USER", "user"),
-#         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-#         "HOST": os.environ.get("SQL_HOST", "localhost"),
-#         "PORT": os.environ.get("SQL_PORT", "5432"),
-#     }
-# }
-=======
 
->>>>>>> 7278db97a1f2d5f0af1b0845bb3ee7a29a1fc296
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
