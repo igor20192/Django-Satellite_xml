@@ -104,17 +104,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# DATABASES = {"default": env.db("DATABASE_URL")}
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["RDS_DB_NAME"],
-        "USER": os.environ["RDS_USERNAME"],
-        "PASSWORD": os.environ["RDS_PASSWORD"],
-        "HOST": os.environ["RDS_HOSTNAME"],
-        "PORT": os.environ["RDS_PORT"],
-    }
-}
+DATABASES = {"default": env.db("DATABASE_URL")}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": os.environ["RDS_DB_NAME"],
+#         "USER": os.environ["RDS_USERNAME"],
+#         "PASSWORD": os.environ["RDS_PASSWORD"],
+#         "HOST": os.environ["RDS_HOSTNAME"],
+#         "PORT": os.environ["RDS_PORT"],
+#     }
+# }
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
