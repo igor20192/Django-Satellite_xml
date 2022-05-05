@@ -48,9 +48,10 @@
 
 <body>
     <div class="container-fuild">
-        <h1>
-            <pre
-                style="color: rgb(241, 234, 12);background-color: blue;">             <b> Create satellites.xml for enigma2</b></pre>
+        <h1 style="color: rgb(241, 234, 12);background-color: blue;position:relative ;top: 2px;text-align:center;">
+            <b>
+                Create
+                satellites.xml for enigma2</b>
         </h1>
         <a style="color: rgb(245, 226, 9);position:relative;top: -52px;left: 10px;" href="{% url 'home' %}">Home</a>
         <div id="flip"
@@ -60,7 +61,8 @@
     </div>
     <div id="panel"
         style="color: aliceblue;position: relative;display: none; top: 3px; width: 200px;height: 400px; left: 900px;">
-        <form style="color: rgb(247, 231, 7)" action="{% url 'send_email' %}" method="post">
+        <form style="color: rgb(10, 34, 251);background-color: rgb(239, 251, 9);background-size: cover;"
+            action="{% url 'send_email' %}" method="post">
             {% csrf_token %}
             {{form_message.as_p}}
             <button class="btn btn-primary" type="submit">Send</button>
