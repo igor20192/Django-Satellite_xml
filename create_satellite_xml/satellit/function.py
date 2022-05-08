@@ -1,9 +1,12 @@
 from cgitb import text
 import re
+from unicodedata import name
 from bs4 import BeautifulSoup
 import httpx
 import xml.etree.ElementTree as xml
 import time
+from satellit.models import My_Sat_xml
+from zipfile import ZipFile
 
 
 def beautify_xml(xml_str):
@@ -13,13 +16,22 @@ def beautify_xml(xml_str):
     return dom.toprettyxml()
 
 
-def create_file_xml(tree):
-    with open("satellites.xml", "wb") as fh:
+def zpifile(user_id):
+    archive = ZipFile(f"media/satellites{str(user_id)}.zip", mode="w")
+    archive.write("media/satellites.xml")
+    archive.close()
+
+
+def create_file_xml(tree, user_id):
+    with open("media/satellites.xml", "wb") as fh:
         tree.write(fh)
-    with open("satellites.xml", "r") as fin:
+
+    with open("media/satellites.xml", "r") as fin:
         data = fin.read()
-    with open("satellites.xml", "wt") as fout:
+    with open("media/satellites.xml", "wt") as fout:
         fout.write(beautify_xml(data))
+
+    zpifile(user_id)
 
 
 def download_provider():
@@ -103,7 +115,7 @@ def download_sat():
     return (logit, satellit)
 
 
-def create_xml(list_box, logit, satellit):
+def create_xml(list_box, logit, satellit, user_id):
 
     import xml.etree.ElementTree as xml
 
@@ -324,7 +336,7 @@ def create_xml(list_box, logit, satellit):
         )
 
     tree = xml.ElementTree(root)
-    create_file_xml(tree)
+    create_file_xml(tree, user_id)
 
 
 def create_provider_xml(list_box, logit, provider):

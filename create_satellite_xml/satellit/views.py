@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import FileResponse, HttpResponse
 from httpcore import request
 from satellit.forms import (
@@ -13,6 +13,8 @@ from satellit.forms import (
 from satellit.function import create_xml, create_provider_xml
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
+import random
+from satellit.models import My_Sat_xml
 
 # Create your views here.
 
@@ -27,21 +29,23 @@ def create_sat(request):
     if request.POST:
 
         if form.is_valid():
-
+            global USER_ID
+            USER_ID = request.session.get("USER_ID", random.randint(0, 1000))
+            print(USER_ID)
             temp = form.cleaned_data.get("satellit")
 
-            context["sat_xml"] = create_xml(temp, logit, satellit)
+            context["sat_xml"] = create_xml(temp, logit, satellit, USER_ID)
             context["data"] = " ,".join(
                 f"{logit[int(i)]}|{satellit[int(i)][:-5]}" for i in temp
             )
-
             return render(request, "satellit/createsat.html", context)
 
     return render(request, "satellit/satlist.html", context)
 
 
 def create_provider(request):
-
+    USER_ID = request.session.get("USER_ID", 17)
+    print(USER_ID)
     context = dict()
     form = ProviderListForm(request.POST or None)
     context["form"] = form
@@ -57,7 +61,7 @@ def create_provider(request):
 
 
 def get_sat_xml(request):
-    return FileResponse(open("satellites.xml", "rb"))
+    return FileResponse(open(f"media/satellites{str(USER_ID)}.zip", "rb"))
 
 
 def contact_view(request):
