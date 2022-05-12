@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+from celery.schedules import crontab
 import environ
 
 env = environ.Env(DEBUG=(bool, False))
@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "satellit",
     "captcha",
+    "task",
+    "django_celery_results",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -118,7 +121,7 @@ DATABASES = {"default": env.db("DATABASE_URL")}
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
@@ -144,3 +147,11 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis"
+# CELERY_BEAT_SCHEDULE = {
+#     "rm_media": {
+#         "task": "task.tasks.rm_media",
+#         "schedule": crontab(hour=21, minute=58),
+#     }
+# }

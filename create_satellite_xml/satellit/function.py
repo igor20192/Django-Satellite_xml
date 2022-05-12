@@ -6,7 +6,7 @@ import httpx
 import xml.etree.ElementTree as xml
 import time
 from satellit.models import My_Sat_xml
-from zipfile import ZipFile
+import os
 
 
 def beautify_xml(xml_str):
@@ -16,22 +16,15 @@ def beautify_xml(xml_str):
     return dom.toprettyxml()
 
 
-def zpifile(user_id):
-    archive = ZipFile(f"media/satellites{str(user_id)}.zip", mode="w")
-    archive.write("media/satellites.xml")
-    archive.close()
-
-
 def create_file_xml(tree, user_id):
-    with open("media/satellites.xml", "wb") as fh:
+    os.mkdir(f"/home/igor/Django-Satellite_xml/create_satellite_xml/media/{user_id}")
+    with open(f"media/{user_id}/satellites.xml", "wb") as fh:
         tree.write(fh)
 
-    with open("media/satellites.xml", "r") as fin:
+    with open(f"media/{user_id}/satellites.xml", "r") as fin:
         data = fin.read()
-    with open("media/satellites.xml", "wt") as fout:
+    with open(f"media/{user_id}/satellites.xml", "wt") as fout:
         fout.write(beautify_xml(data))
-
-    zpifile(user_id)
 
 
 def download_provider():
@@ -339,7 +332,7 @@ def create_xml(list_box, logit, satellit, user_id):
     create_file_xml(tree, user_id)
 
 
-def create_provider_xml(list_box, logit, provider):
+def create_provider_xml(list_box, logit, provider, user_id):
 
     root = xml.Element("satellites")  # Создаем XML файл
     root.set("version", "1.0")
@@ -468,4 +461,4 @@ def create_provider_xml(list_box, logit, provider):
         )
 
     tree = xml.ElementTree(root)
-    create_file_xml(tree)
+    create_file_xml(tree, user_id)

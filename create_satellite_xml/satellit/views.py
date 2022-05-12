@@ -13,15 +13,15 @@ from satellit.forms import (
 from satellit.function import create_xml, create_provider_xml
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
-import random
-from satellit.models import My_Sat_xml
+import time
+
 
 # Create your views here.
 
 
 def create_sat(request):
+    request.session["id"] = time.asctime()
     context = dict()
-
     form = SatListForm(request.POST or None)
 
     context["form"] = form
@@ -29,12 +29,14 @@ def create_sat(request):
     if request.POST:
 
         if form.is_valid():
-            global USER_ID
-            USER_ID = request.session.get("USER_ID", random.randint(0, 1000))
-            print(USER_ID)
+            # global USER_ID
+            # USER_ID = request.session.get("USER_ID", time.asctime())
+            # print(USER_ID)
             temp = form.cleaned_data.get("satellit")
 
-            context["sat_xml"] = create_xml(temp, logit, satellit, USER_ID)
+            context["sat_xml"] = create_xml(
+                temp, logit, satellit, request.session["id"]
+            )
             context["data"] = " ,".join(
                 f"{logit[int(i)]}|{satellit[int(i)][:-5]}" for i in temp
             )
@@ -44,8 +46,7 @@ def create_sat(request):
 
 
 def create_provider(request):
-    USER_ID = request.session.get("USER_ID", 17)
-    print(USER_ID)
+    request.session["id"] = time.asctime()
     context = dict()
     form = ProviderListForm(request.POST or None)
     context["form"] = form
@@ -53,7 +54,9 @@ def create_provider(request):
         if form.is_valid():
             temp = form.cleaned_data.get("provider")
 
-            context["provider_xml"] = create_provider_xml(temp, lgt_prov, provider)
+            context["provider_xml"] = create_provider_xml(
+                temp, lgt_prov, provider, request.session["id"]  # USER_ID
+            )
             context["temp"] = temp
             context["data"] = ",".join(provider[int(i)][:-5] for i in temp)
             return render(request, "satellit/createprovider.html", context)
@@ -61,7 +64,7 @@ def create_provider(request):
 
 
 def get_sat_xml(request):
-    return FileResponse(open(f"media/satellites{str(USER_ID)}.zip", "rb"))
+    return FileResponse(open(f"media/{request.session['id']}/satellites.xml", "rb"))
 
 
 def contact_view(request):
