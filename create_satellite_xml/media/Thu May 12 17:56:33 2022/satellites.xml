@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<satellites version="1.0" encoding="iso-8859-1">
-	<!--source https://www.lyngsat.com/ parsing 05/12/2022, 17:56:33-->
-	<sat name="Vini (180E)" flags="0" position="1800">
-		<transponder frequency="11075000" symbol_rate="45000000" polarization="1" fec_inner="3" system="1" modulation="2"/>
-		<transponder frequency="11155000" symbol_rate="28588000" polarization="1" fec_inner="3" system="1" modulation="2"/>
-	</sat>
-</satellites>

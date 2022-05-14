@@ -149,9 +149,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis"
-# CELERY_BEAT_SCHEDULE = {
-#     "rm_media": {
-#         "task": "task.tasks.rm_media",
-#         "schedule": crontab(hour=21, minute=58),
-#     }
-# }
+CELERY_BEAT_SCHEDULE = {
+    "rm_media": {
+        "task": "task.tasks.rm_media",
+        "schedule": crontab(hour=13, minute=27),
+    }
+}

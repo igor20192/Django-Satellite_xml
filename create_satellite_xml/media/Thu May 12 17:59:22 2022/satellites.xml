@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-<satellites version="1.0" encoding="iso-8859-1">
-	<!--source https://www.lyngsat.com/ parsing 05/12/2022, 17:59:22-->
-	<sat name="American-Forces-Network (9E)" flags="0" position="90">
-		<transponder frequency="11804000" symbol_rate="27500000" polarization="1" fec_inner="2" system="1" modulation="2"/>
-	</sat>
-</satellites>
