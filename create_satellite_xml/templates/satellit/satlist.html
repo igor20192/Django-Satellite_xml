@@ -3,7 +3,7 @@
 <div class="container pt-3">
     <form style="color: rgb(197, 238, 143);" action="{% url 'create_satellit' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{form.as_p}}
         <button id='getDataBtn' type="submit" class="btn btn-primary"> <span id="div1" style="display:none ;"
                 class="spinner-border spinner-border-sm"></span>
             Create satellites</button>

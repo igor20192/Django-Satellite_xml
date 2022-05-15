@@ -26,6 +26,7 @@ def create_sat(request):
 
     context["form"] = form
     context["spinner"] = None
+
     if request.POST:
 
         if form.is_valid():
